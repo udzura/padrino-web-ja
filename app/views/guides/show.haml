@@ -1,0 +1,13 @@
+.grid_12.alpha.margin-top
+  -if @guide
+    -title "Guides", @guide.title
+    -description @guide.body_html
+    %h1=@guide.title
+    .content~@guide.body_html
+    =disqus_thread
+  -else
+    %h1 Guide not found
+    .content The guide requested is not available
+
+.grid_4.omega.margin-top=partial "guides/sidebar"
+.clear

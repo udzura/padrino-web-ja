@@ -1,0 +1,37 @@
+.block
+  .secondary-navigation
+    %ul.wat-cf
+      %li.first=link_to pat(:labels), url(:page_labels, :index)
+      %li.active=link_to pat(:list), url(:pages, :index)
+      %li=link_to pat(:new), url(:pages, :new)
+  .content
+    %h2.title
+      =pat(:all)
+      =mt(:page)
+    .inner
+      %table.table.sortable
+        %thead
+          %tr
+            %th.first=mat(:page, :title)
+            %th=mat(:page, :label)
+            %th=mat(:page, :link)
+            %th=mat(:page, :draft)
+            %th=mat(:page, :created_at)
+            %th.last="&nbsp;"
+        %tbody
+          -@pages.each do |page|
+            %tr[page]
+              %td.first=page.title
+              %td=page.label.name
+              %td=link_to PadrinoWeb.url(:pages, :show, :id => page), PadrinoWeb.url(:pages, :show, :id => page), :target => :_blank
+              %td=page.draft? ? "Yes" : "No"
+              %td=l(page.updated_at, :format => :short)
+              %td.last
+                =button_to pat(:edit), url(:pages, :edit, :id => page.id), :method => :get, :class => :button_to
+                ="|"
+                =button_to pat(:delete), url(:pages, :destroy, :id => page.id), :method => :delete, :class => :button_to, :onsubmit => "return confirm('#{pat(:confirm)}')"
+      .actions-bar.wat-cf
+        .actions="&nbsp;"
+
+-@hide_textitle = true
+-content_for :sidebar, partial("pages/sidebar")

@@ -1,0 +1,10 @@
+.block
+  %h3 Labels
+  .content
+    -PageLabel.all.each do |label|
+      %p
+        %b=label.name 
+        =":"
+        =label.description
+
+=partial('base/textile') unless @hide_textitle

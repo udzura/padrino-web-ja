@@ -1,0 +1,15 @@
+Hi,<br />
+<br />
+<%= post.author.full_name %> edited a post "<%= post.title %>"<br />
+<br />
+you can see it here: <%= Admin.domain %><%= PadrinoWeb.url(:blog, :show, :id => post) %><br />
+<br />
+<%= %w(title summary body).map { |key|
+    if diff = post.diff(key)
+      "<div style=\"font-weight:bold\">#{key.humanize}</div>" +
+      Albino.colorize(diff, :diff, :html, :linenos => :table, :noclasses => true)
+    end
+}.compact.join("\n") %>
+---<br />
+Best Regards<br />
+Padrino Team

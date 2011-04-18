@@ -1,0 +1,12 @@
+-form_tag where, :method => :get do
+  .align-right
+    =text_field_tag :q, :value => params[:q], :class => :search_field
+    =submit_tag "Search", :class => :search_button
+    .clear
+    %em Write at least 4 chars
+    %br
+    %em
+      Matches are
+      %strong.highlight highlighted
+
+%br

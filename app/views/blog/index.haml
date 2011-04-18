@@ -1,0 +1,27 @@
+-title "Blog", @category.try(:name)
+.grid_12.alpha.margin-top
+  -if @posts.empty?
+    %h1 No Posts Found
+    .content The post requested is not available
+  -else
+    -description @posts.map(&:summary_html).join(" ")
+    -@posts.each_with_index do |post, i|
+      %h1{:class => ("border-top" if i!=0)}
+        =link_to highlight(post.title, @search), url(:blog, :show, :id => post), :unless => post.body.blank?
+      .content
+        ~highlight(post.summary_html, @search)
+        -if post.body.present?
+          =link_to "Continue Reading", url(:blog, :show, :id => post)
+      .align-right
+        Posted in
+        =post.categories.map(&:name).join(", ")
+        by
+        =post.author.full_name
+        ="|"
+        =time_ago_in_words(post.created_at || Time.now) + ' ago'
+        ="|"
+        =link_to "0 Comments", url(:blog, :show, :id => post), :anchor => "disqus_thread"
+    .pagination=paginate(@posts, :blog, :index)
+    =disqus_comment_counts
+.grid_4.omega.margin-top=partial "blog/sidebar"
+.clear

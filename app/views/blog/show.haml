@@ -1,0 +1,11 @@
+-title "Blog", @post.title
+-description @post.summary_html
+.grid_12.alpha
+  %p
+    %h1=@post.title
+    .content
+      ~@post.summary_html
+      ~@post.body_html
+    =disqus_thread
+.grid_4.omega.margin-top=partial "blog/sidebar"
+.clear

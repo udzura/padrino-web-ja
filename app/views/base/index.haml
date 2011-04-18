@@ -1,0 +1,33 @@
+-title Page.find_labeled(:home_slogan).try(:body)
+%h1.slogan=Page.find_labeled(:home_slogan).try(:body)
+
+.grid_6.alpha.margin-top=image_tag("glass.png", :alt => "Padrino Ruby Framework", :height => 161)
+.grid_6.no-bg~Page.find_labeled(:home_code).try(:body_html)
+.grid_4.omega
+  %ul.features
+    -Page.find_all_labeled(:home_feature).each_with_index do |feature, i|
+      %li=link_to feature.title.upcase, :anchor => "feature-#{feature.id}", :rel => :popup, :class => (:alternate if i%2==0)
+.clear
+
+.display-none
+  -Page.find_all_labeled(:home_feature).each do |feature|
+    .feature{:id => "feature-#{feature.id}"}
+      %h3=feature.title
+      ~feature.body_html
+
+.screens
+  =link_to image_tag("screens.jpg", :alt => "Padrino Admin", :height => 302), image_path("login.png"), :rel => :popup_image
+  %br
+  =Page.find_labeled(:home_admin).try(:body_html)
+
+=link_to image_tag("dashboard.png", :alt => "Dashboard Page"), image_path("dashboard.png"), :rel => :popup_image, :style => "display:none"
+=link_to image_tag("index.png", :alt => "Index Page"), image_path("index.png"), :rel => :popup_image, :style => "display:none"
+
+.margin-top~Page.find_labeled(:home).try(:body_html)
+
+.grid_5.alpha.margin-top
+  %br
+  %br
+  =image_tag("mic.png", :alt => "mic")
+.grid_11.omega.margin-top~Page.find_labeled(:home_mic).try(:body_html)
+.clear

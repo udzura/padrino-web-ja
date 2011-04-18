@@ -1,0 +1,51 @@
+!!!
+%html{ :xmlns=>"http://www.w3.org/1999/xhtml" }
+  %head
+    %title=title
+    %meta{'http-equiv' => 'Content-Type', :content => 'text/html', :name => "description", :content => description}
+    %link{:href => url(:blog, :rss), :rel => :alternate, :title => :rss, :type => "application/rss+xml"}
+    =stylesheet_link_tag "reset", "text", "960", "fancybox", "highlighter", "padrino", :cache => "padrino-bundle"
+    =javascript_include_tag "jquery", "fancybox", "application", :cache => "padrino-bundle"
+  %body
+    .ribbon=link_to image_tag("screencast.png", :alt => key_density("Watch our Blog Tutorial Screencast")), "/guides/blog-tutorial"
+    .container_16
+      #header.grid_16
+        .grid_4.alpha=link_to image_tag("padrino.jpg", :alt => key_density, :height => 100), url(:base, :index)
+        .grid_12.omega
+          %ul.menu
+            %li=link_to "CODE", "https://github.com/padrino/padrino-framework", :target => :_blank
+            %li=link_to "BLOG", url(:blog, :index)
+            %li=link_to "GUIDES", url(:guides, :index)
+            %li=link_to "API", url(:base, :api), :target => :_blank
+            -Page.find_all_labeled(:menu).each do |page|
+              %li=link_to page.title.upcase, url(:pages, :show, :id => page)
+            %li=link_to "CHANGES", url(:base, :changes)
+            %li=link_to "TEAM", url(:base, :team)
+        .clear
+      .clear
+      .grid_16=yield
+      .clear
+      #footer.grid_16
+        .left
+          Running Padrino v.
+          =Padrino.version
+          on Sinatra v.
+          =Sinatra::VERSION
+        .right
+          Padrino is released under the
+          =link_to "MIT LICENSE", "http://en.wikipedia.org/wiki/MIT_License", :target => :_blank
+          ="-"
+          Hosting by
+          =link_to "LipsiaSOFT s.r.l.", "http://www.lipsiasoft.com"
+        .clear
+      .clear
+    :javascript
+      var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+      document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    :javascript
+      try {
+      var pageTracker = _gat._getTracker("UA-12939205-1");
+      pageTracker._setDomainName("none");
+      pageTracker._setAllowLinker(true);
+      pageTracker._trackPageview();
+      } catch(err) {}

@@ -1,0 +1,21 @@
+=partial('base/search', :locals => { :where => url(:guides, :search) })
+
+-if @guide && @guide.body_chapters.present?
+  %h3 Chapters
+  %ul
+    -@guide.body_chapters.each do |chapter|
+      %li=link_to chapter, :anchor => Guide.label_for(chapter)
+%h3 Guides Index
+%ul
+  -Guide.all(:draft => false, :order => "position").each do |guide|
+    %li=link_to guide.title, url(:guides, :show, :id => guide)
+
+-if @guide
+  %h3 Info
+  %ul
+    %li
+      Last edited by
+      =@guide.author.full_name
+    %li="Edited " + time_ago_in_words(@guide.updated_at || Time.now) + ' ago'
+    %li=link_to "0 Comments", :anchor => :disqus_thread
+    =disqus_comment_counts
