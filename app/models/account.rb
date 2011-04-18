@@ -57,9 +57,9 @@ class Account
   ##
   # This method return name + surname
   #
-  # def full_name
-  #   "#{name} #{surname}".strip
-  # end
+  def full_name
+    "#{name} #{surname}".strip
+  end
 
   ##
   # This method return the gravatar
