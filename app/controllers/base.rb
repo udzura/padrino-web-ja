@@ -11,7 +11,7 @@ PadrinoWeb.controllers :base, :cache => true do
   end
 
   get :api, :map => "/api", :cache => false do
-    redirect "/api/index.html"
+    redirect "http://www.padrinorb.com/api/index.html"
   end
 
   get :changes, :map => "/changes" do
