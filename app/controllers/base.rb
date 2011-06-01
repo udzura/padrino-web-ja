@@ -18,10 +18,11 @@ PadrinoWeb.controllers :base, :cache => true do
     expires_in 3600
     logger.debug "Getting Change Log"
     rdoc = ""
-    Net::HTTP.new('github.com', 443) do |https|
+    Net::HTTP.new('github.com', 443).tap do |https|
       https.use_ssl = true
       https.verify_mode = OpenSSL::SSL::VERIFY_NONE
-      rdoc = http.get('/padrino/padrino-framework/raw/master/CHANGES.rdoc').body
+      https.start {
+          rdoc = https.get('/padrino/padrino-framework/raw/master/CHANGES.rdoc').body }
     end
     rdoc.gsub!(/\= CHANGES\n\n/,'') # remove redundant <h1>CHANGES</h1>
     html = render :rdoc, rdoc
