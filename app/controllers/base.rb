@@ -1,3 +1,4 @@
+require 'net/https'
 PadrinoWeb.controllers :base, :cache => true do
 
   get :index, :map => "/" do
