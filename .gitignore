@@ -6,3 +6,7 @@ vendor/gems/*
 !vendor/gems/cache/
 .sass-cache/*
 .bundle
+.rvmrc
+public/javascripts/padrino-bundle.js
+public/stylesheets/padrino-bundle.css
+

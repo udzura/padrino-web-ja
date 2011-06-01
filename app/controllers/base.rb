@@ -17,7 +17,12 @@ PadrinoWeb.controllers :base, :cache => true do
   get :changes, :map => "/changes" do
     expires_in 3600
     logger.debug "Getting Change Log"
-    rdoc = open("https://github.com/padrino/padrino-framework/raw/master/CHANGES.rdoc").read
+    rdoc = ""
+    Net::HTTP.new('github.com', 443) do |https|
+      https.use_ssl = true
+      https.verify_mode = OpenSSL::SSL::VERIFY_NONE
+      rdoc = http.get('/padrino/padrino-framework/raw/master/CHANGES.rdoc').body
+    end
     rdoc.gsub!(/\= CHANGES\n\n/,'') # remove redundant <h1>CHANGES</h1>
     html = render :rdoc, rdoc
     html.sub!(/^<h2>/, '<h2 style="border-top:none">') # remove border from the first h2
