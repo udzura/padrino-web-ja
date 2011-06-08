@@ -16,7 +16,7 @@
         Posted in
         =post.categories.map(&:name).join(", ")
         by
-        =post.author.full_name
+        =(post.author.try:full_name or "unknown")
         ="|"
         =time_ago_in_words(post.created_at || Time.now) + ' ago'
         ="|"

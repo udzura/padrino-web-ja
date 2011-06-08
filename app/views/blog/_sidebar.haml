@@ -9,7 +9,7 @@
 -if @post
   %h3 Info
   %ul
-    %li='Author ' + @post.author.full_name
+    %li='Author ' + (@post.author.try :full_name or "unknown")
     %li='Posted ' + time_ago_in_words(@post.updated_at || Time.now) + ' ago'
     %li=link_to '0 Comments', :anchor => :disqus_thread
     =disqus_comment_counts

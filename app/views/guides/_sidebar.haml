@@ -15,7 +15,7 @@
   %ul
     %li
       Last edited by
-      =@guide.author.full_name
+      =(@guide.author.try :full_name or "unknown")
     %li="Edited " + time_ago_in_words(@guide.updated_at || Time.now) + ' ago'
     %li=link_to "0 Comments", :anchor => :disqus_thread
     =disqus_comment_counts
