@@ -34,3 +34,4 @@ end
 
 gem 'padrino', '0.9.29'
 gem 'padrino-contrib', '0.0.6'
+

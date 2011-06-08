@@ -72,3 +72,4 @@ module Textile
   end # InstanceMethods
 end # Permalink
 MongoMapper::Document.send(:include, Textile)
+
