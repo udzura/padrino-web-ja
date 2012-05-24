@@ -79,6 +79,7 @@ describe "Guide Model" do
 
     it 'can apply correctly target blank' do
       links = <<-HTML
+        Lorem ipsum dolor sit amet, consectetur <a href="http://jp.padrinorb.com">jp_site</a> elit, 
         Lorem ipsum dolor sit amet, consectetur <a href="http://padrinorb.com">adipisicing</a> elit, 
         sed do eiusmod tempor <a href="http://external">incididunt</a> ut labore et dolore magna aliqua. 
         Ut enim ad minim veniam, quis <a href="http://www.padrinorb.org">nostrud</a> exercitation 
@@ -88,6 +89,7 @@ describe "Guide Model" do
         Lorem ipsum dolor sit amet, consectetur <a href="/internal/page">adipisicing</a> elit, 
       HTML
       guide = @account.guides.create(:title => 'Foo Bar', :body => links)
+      guide.body_html.should =~ /<a href="http:\/\/jp.padrinorb.com">jp_site<\/a>/
       guide.body_html.should =~ /<a href="http:\/\/padrinorb.com">adipisicing<\/a>/
       guide.body_html.should =~ /<a href="http:\/\/external" target="_blank">/
       guide.body_html.should =~ /<a href="http:\/\/www.padrinorb.org">nostrud<\/a>/
