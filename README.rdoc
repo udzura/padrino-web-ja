@@ -1,4 +1,4 @@
-Padrino Web is the source code for the Padrino official website (www.padrinorb.com)
+Padrino Web is the source code for the Padrino official Japanese website (jp.padrinorb.com)
 
 The Padrino website is a simplified CMS with the following features:
 
