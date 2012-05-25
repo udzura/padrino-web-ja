@@ -5,7 +5,7 @@ class Admin < Padrino::Application
 
   # App setting
   set :email_from, "Padrino WebSite <noreply@padrinorb.com>"
-  set :domain,     "http://www.padrinorb.com"
+  set :domain,     "http://jp.padrinorb.com"
 
   # Authentication
   enable  :authentication
